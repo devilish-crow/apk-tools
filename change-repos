@@ -42,12 +42,12 @@ for mirror in $(wget -qO- "https://mirrors.alpinelinux.org/mirrors.txt"); do
 done
 
 printf "%b" "$list" | sort -n | head -n2 | while read -r _ mirror; do
-    [ -n "$mirror" ] && echo "$mirror/$VERSION/main" >> "$LOCAL"
+    [ -n "$mirror" ] && echo "$mirror$VERSION/main" >> "$LOCAL"
 done
 
-MASTER="https://dl-cdn.alpinelinux.org/alpine"
-echo "$MASTER/$VERSION/main" >> "$LOCAL"
-$COMMUNITY && echo "$MASTER/$VERSION/community" >> "$LOCAL"
-$TESTING && echo "$MASTER/$VERSION/testing" >> "$LOCAL"
+MASTER="https://dl-cdn.alpinelinux.org/alpine/"
+echo "$MASTER$VERSION/main" >> "$LOCAL"
+$COMMUNITY && echo "$MASTER$VERSION/community" >> "$LOCAL"
+$TESTING && echo "$MASTER$VERSION/testing" >> "$LOCAL"
 
 apk update --quiet
